@@ -1,0 +1,144 @@
+* {
+    box-sizing: border-box;
+}
+/*This just stops me getting horizontal scrolling if anything overflows the width*/
+body {
+    overflow-x: hidden;
+}
+/*Just removing default browser padding/margin*/
+html,
+body {
+    padding: 0;
+    margin: 0;
+    color: black;
+}
+/*Flexbox gives us the flexiness we need. The top just stays put as there is no scrolling on the body due to the page never exceeding viewport height*/
+
+/*This is our main wrapping element, it's made 100vh high to ensure it is always the correct size and then moved into place and padded with negative margin and padding*/
+.Container {
+    display: flex;
+    overflow: hidden;
+    height: 115vh;
+    margin-top: -100px;
+    padding-top: 100px;
+    position: relative;
+    width: 100%;
+    backface-visibility: hidden;
+    will-change: overflow;
+}
+/*All the scrollable sections should overflow and be whatever height they need to be. As they are flex-items (due to being inside a flex container) they could be made to stretch full height at all times if needed.
+WebKit inertia scrolling is being added here for any present/future devices that are able to make use of it.
+*/
+.Left,
+.Right {
+    overflow: auto;
+    height: auto;
+    padding: .5rem;
+    -webkit-overflow-scrolling: touch;
+    -ms-overflow-style: none;
+}
+
+/*  Left and Right are set sizes while the Middle is set to flex one so it occupies all remaining space. This could be set as a width too if prefereable, perhaps using calc.*/
+.Left {
+    width: 25%;
+    border-right: 2px solid black;
+}
+
+.Right {
+    flex: 1;
+}
+
+
+.leftGrid {
+  display: grid;
+  grid-row-gap: 10px;
+}
+
+.rightGrid {
+  display: grid;
+  grid-row-gap: 10px;
+}
+
+.gridElementLeft {
+  border: 1px solid grey;
+  padding-bottom: 50px;
+  border-bottom: 2px solid black;
+
+}
+.gridElementRight {
+  border: 1px solid grey;
+  padding-bottom: 50px;
+  border-bottom: 2px solid black;
+  height: 150px;
+
+}
+
+
+
+.itemName {
+  font-size: 35px;
+}
+
+.tableNo {
+  font-size: 25px;
+}
+
+.Price  {
+  font-size: 20px;
+}
+
+.Type {
+  font-size: 13px;
+}
+
+#foodSearch {
+  width: 600px;
+  height: 40px;
+  font-size: 20px;
+
+}
+
+#tableSearch {
+  width: 300px;
+  height: 40px;
+  font-size: 20px;
+}
+
+.modalOverlay {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    padding-top: 100px; /* Location of the box */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+
+/* Modal Content */
+.modal-content {
+    background-color: white;
+    margin: auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 50%;
+    display: grid;
+    grid-template-columns: 2fr 4fr 2fr 3fr 1fr 3fr 1fr;
+}
+
+BUTTON {
+  width: 20px;
+}
+
+#Remove {
+  width: auto;
+}
+
+#Total {
+  grid-column-start: 3;
+  grid-column-end: 7;
+  padding-top: 20px;
+}
