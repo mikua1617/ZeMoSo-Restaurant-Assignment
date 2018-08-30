@@ -49,10 +49,11 @@ var Prices = document.getElementsByClassName('itemPrices');
 
 
 var temp = 0, temporary=0;
-
+var glob = 0
 var i=0;
 for(i=0; i<Tables.length; i++){
   Tables[i].onclick = (function(i) {return function() {
+        glob = i;
 
         while (overlays[i].hasChildNodes()) {
             overlays[i].removeChild(overlays[i].lastChild);
@@ -112,6 +113,7 @@ for(i=0; i<Tables.length; i++){
 
 
         overlays[i].style.display = "block";
+        Tables[i].style.backgroundColor = "yellow";
         temp = i;
 
 
@@ -217,37 +219,38 @@ for(i=0; i<Tables.length; i++){
 window.onclick = function(event) {
   if (event.target == overlays[temp]) {
       overlays[temp].style.display = "none";
+      Tables[glob].style.backgroundColor = "";
   }
 }
 
 
 var dragged;
 
-/* events fired on the draggable target */
+
 document.addEventListener("drag", function( event ) {
 
 }, false);
 
 document.addEventListener("dragstart", function( event ) {
-    // store a ref. on the dragged elem
+
     dragged = event.target;
-    // make it half transparent
+
     event.target.style.opacity = .5;
 }, false);
 
 document.addEventListener("dragend", function( event ) {
-    // reset the transparency
+
     event.target.style.opacity = "";
 }, false);
 
-/* events fired on the drop targets */
+
 document.addEventListener("dragover", function( event ) {
-    // prevent default to allow drop
+
     event.preventDefault();
 }, false);
 
 document.addEventListener("dragenter", function( event ) {
-    // highlight potential drop target when the draggable element enters it
+
     if ( event.target.className == "gridElementLeft" ) {
         event.target.style.background = "#ced8e8";
     }
@@ -255,7 +258,7 @@ document.addEventListener("dragenter", function( event ) {
 }, false);
 
 document.addEventListener("dragleave", function( event ) {
-    // reset background of potential drop target when the draggable element leaves it
+
     if ( event.target.className == "gridElementLeft" ) {
         event.target.style.background = "";
     }
@@ -264,9 +267,9 @@ document.addEventListener("dragleave", function( event ) {
 
 
 document.addEventListener("drop", function( event ) {
-    // prevent default action (open as link for some elements)
+
     event.preventDefault();
-    // move dragged elem to the selected drop target
+    
     if ( event.target.className == "gridElementLeft" ) {
         event.target.style.background = "";
         var counter=0;
