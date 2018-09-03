@@ -251,8 +251,12 @@ document.addEventListener("dragover", function( event ) {
 
 document.addEventListener("dragenter", function( event ) {
 
-    if ( event.target.className == "gridElementLeft" ) {
+    if ( event.target.className == "gridElementLeft"  ) {
         event.target.style.background = "#ced8e8";
+    }
+
+    else if(event.target.className == "tableNo" || event.target.className == "Bill" ||event.target.className == "totalItems"){
+      event.target.parentElement.style.background = "#ced8e8";
     }
 
 }, false);
@@ -260,8 +264,13 @@ document.addEventListener("dragenter", function( event ) {
 document.addEventListener("dragleave", function( event ) {
 
     if ( event.target.className == "gridElementLeft" ) {
-        event.target.style.background = "";
+
+      event.target.style.background = "";
+
     }
+    //else if(event.target.className == "tableNo" || event.target.className == "Bill" ||event.target.className == "totalItems"){
+    //  event.target.parentElement.style.background = "";
+    //}
 
 }, false);
 
@@ -269,8 +278,8 @@ document.addEventListener("dragleave", function( event ) {
 document.addEventListener("drop", function( event ) {
 
     event.preventDefault();
-    
-    if ( event.target.className == "gridElementLeft" ) {
+
+    if ( event.target.className == "gridElementLeft") {
         event.target.style.background = "";
         var counter=0;
         for(counter = 0; counter<Tables.length; counter++){
@@ -314,6 +323,53 @@ document.addEventListener("drop", function( event ) {
           Prices[counter].appendChild(mod3);
         }
 
+    }
+
+    else if(event.target.className == "tableNo" || event.target.className == "Bill" ||event.target.className == "totalItems"){
+
+
+      event.target.parentElement.style.background = "";
+      var counter=0;
+      for(counter = 0; counter<Tables.length; counter++){
+        if(Tables[counter]==event.target.parentElement){
+          break;
+        }
+      }
+
+      var targetVar = event.target.parentElement;
+      var temp2 = Number(event.target.parentElement.children[2].innerText);
+      temp2+=1;
+      event.target.parentElement.children[2].innerText = temp2;
+
+      var temp1 = Number(event.target.parentElement.children[1].innerText);
+      temp1+=Number(dragged.children[1].innerText);
+      event.target.parentElement.children[1].innerText = temp1;
+
+
+
+
+      var counter2=0, flag=0;
+
+      for(counter2=0; counter2<itemVarieties[counter].childElementCount; counter2++){
+          if(itemVarieties[counter].children[counter2].innerText==dragged.children[0].innerText){
+            var temp3 = Number(itemNumbers[counter].children[counter2].innerText);
+            temp3+=1;
+            itemNumbers[counter].children[counter2].innerText = temp3;
+            flag=1;
+            break;
+          }
+      }
+      if(flag===0){
+        var mod1 = document.createElement('div');
+        var mod2 = document.createElement('div');
+        var mod3 = document.createElement('div');
+        mod1.innerText = dragged.children[0].innerText;
+        mod2.innerText = 1;
+        mod3.innerText = dragged.children[1].innerText;
+        itemVarieties[counter].appendChild(mod1);
+        itemNumbers[counter].appendChild(mod2);
+        Prices[counter].appendChild(mod3);
+      }
     }
 
 }, false);

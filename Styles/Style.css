@@ -52,6 +52,7 @@ body {
 .rightGrid {
   display: grid;
   grid-row-gap: 10px;
+
 }
 
 .gridElementLeft {
