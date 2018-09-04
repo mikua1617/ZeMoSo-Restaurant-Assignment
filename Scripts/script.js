@@ -59,9 +59,38 @@ for(i=0; i<Tables.length; i++){
             overlays[i].removeChild(overlays[i].lastChild);
         }
 
+        var mod = document.createElement("div");
+
+        var descriptors1 = document.createElement("div");
+        var descriptors2 = document.createElement("div");
+        var descriptors3 = document.createElement("div");
+        var descriptors4 = document.createElement("div");
+        var descriptors5 = document.createElement("div");
+        var descriptors6 = document.createElement("div");
+        var descriptors7 = document.createElement("div");
+
+        descriptors1.innerText = "Sr No.";
+        descriptors2.innerText = "Name";
+        descriptors3.innerText = "Total Price";
+        descriptors4.innerText = "";
+        descriptors5.innerText = "No. of items";
+        descriptors6.innerText = "";
+        descriptors7.innerText = "";
+
+        mod.appendChild(descriptors1);
+        mod.appendChild(descriptors2);
+        mod.appendChild(descriptors3);
+        mod.appendChild(descriptors4);
+        mod.appendChild(descriptors5);
+        mod.appendChild(descriptors6);
+        mod.appendChild(descriptors7);
+
+
+
+
         var limit = itemVarieties[i].childElementCount;
 
-        var mod = document.createElement("div");
+
 
         for(j=0; j<limit; j++){
           var mod1 = document.createElement("div");
@@ -101,7 +130,7 @@ for(i=0; i<Tables.length; i++){
         var total = document.createElement("div");
         var sum=0;
         for(var tempcounter=0; tempcounter<limit; tempcounter++){
-            sum+=Number(mod.children[(tempcounter*7)+2].innerText);
+            sum+=Number(mod.children[(tempcounter*7)+9].innerText);
         }
         total.innerText = "Total cart value:   " + sum;
         total.id = "Total";
@@ -133,7 +162,7 @@ for(i=0; i<Tables.length; i++){
             itemNumbers[i].childNodes[num+1].remove();
             Prices[i].childNodes[num+1].remove();
 
-            for(var tempcount=7*num; tempcount<(7*num)+7; tempcount++){
+            for(var tempcount=7*num; tempcount<(7*num)+14; tempcount++){
               overlays[i].childNodes[0].childNodes[tempcount].remove();
 
             }
@@ -151,9 +180,9 @@ for(i=0; i<Tables.length; i++){
         for(var num=0; num<addbtn.length; num++){
           addbtn[num].onclick = (function(num) {return function() {
 
-          var changer = Number(overlays[i].children[0].children[4+(num*7)].innerText);
+          var changer = Number(overlays[i].children[0].children[11+(num*7)].innerText);
           changer+=1;
-          overlays[i].children[0].children[4+(num*7)].innerText = changer;
+          overlays[i].children[0].children[11+(num*7)].innerText = changer;
           itemNumbers[i].children[num].innerText = changer;
           var temp5 = Number(Tables[i].children[2].innerText);
           temp5+=1;
@@ -172,13 +201,13 @@ for(i=0; i<Tables.length; i++){
       for(var num=0; num<delbtn.length; num++){
         delbtn[num].onclick = (function(num) {return function() {
 
-          if(overlays[i].children[0].children[4+(num*7)].innerText>0 && Tables[i].children[2].innerText>0 && Tables[i].children[1].innerText>0){
+          if(overlays[i].children[0].children[11+(num*7)].innerText>0 && Tables[i].children[2].innerText>0 && Tables[i].children[1].innerText>0){
 
 
 
-        var changer = Number(overlays[i].children[0].children[4+(num*7)].innerText);
+        var changer = Number(overlays[i].children[0].children[11+(num*7)].innerText);
         changer-=1;
-        overlays[i].children[0].children[4+(num*7)].innerText = changer;
+        overlays[i].children[0].children[11+(num*7)].innerText = changer;
         itemNumbers[i].children[num].innerText = changer;
         var temp5 = Number(Tables[i].children[2].innerText);
         temp5-=1;
@@ -189,13 +218,13 @@ for(i=0; i<Tables.length; i++){
         Tables[i].children[1].innerText = temp6;
       }
 
-      if(overlays[i].children[0].children[4+(num*7)].innerText==0){
+      if(overlays[i].children[0].children[11+(num*7)].innerText==0){
 
         itemVarieties[i].childNodes[num+1].remove();
         itemNumbers[i].childNodes[num+1].remove();
         Prices[i].childNodes[num+1].remove();
 
-        for(var tempcount=7*num; tempcount<(7*num)+7; tempcount++){
+        for(var tempcount=7*num; tempcount<(7*num)+14; tempcount++){
           overlays[i].childNodes[0].childNodes[tempcount].remove();
 
         }
